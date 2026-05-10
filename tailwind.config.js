@@ -8,16 +8,17 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: "#253386",
-          "primary-dark": "#1A286B",
+          primary: "#2C3A8C",
+          "primary-dark": "#1a2660",
           secondary: "#3E3A36",
           accent: "#FBB03B",
+          yellow: "#E8BD63",
           cream: "#FDF8EE",
           green: "#006837",
         }
       },
       fontFamily: {
-        main: ["Outfit", "sans-serif"],
+        main: ["DM Sans", "sans-serif"],
         serif: ["Playfair Display", "serif"],
       },
       animation: {

@@ -1,34 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-rose: #2C3A8C;
+  --secondary-beige: #A59381;
+  --bg-light: #EFE7DF;
+  --bg-soft: #F5EEEC;
+  --text-dark: #3E3A36;
+}
+
 @layer base {
   body {
-    @apply font-main text-slate-900 bg-white antialiased overflow-x-hidden;
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
+}
+
+.serif {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+p {
+  font-size: 19px;
+  line-height: 1.75;
+  font-weight: 500;
+}
+
+.bg-primary { background-color: var(--primary-rose) !important; color: white; }
+.bg-soft { background-color: var(--bg-soft) !important; }
+.text-primary { color: var(--primary-rose) !important; }
+
+.nav-link {
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  padding-bottom: 4px;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-rose);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--primary-rose) !important;
 }
 
 @layer components {
   .container-custom {
     @apply max-w-[1440px] mx-auto px-6 md:px-12;
   }
-  
+
   .serif-title {
     @apply font-serif text-6xl md:text-7xl font-black leading-[1.1] mb-6;
   }
-  
+
   .serif-heading-vibrant {
     @apply relative inline-block pt-10 mb-10 font-serif text-5xl md:text-6xl font-black tracking-tighter;
   }
-  
+
   .serif-heading-vibrant::before {
     content: '';
     @apply absolute top-0 left-0 w-full h-1 bg-slate-900;
   }
-  
+
   .section-header-center .serif-heading-vibrant::before {
     @apply left-1/2 -translate-x-1/2;
   }
