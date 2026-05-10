@@ -2,18 +2,8 @@ import { useState, useEffect } from "react";
 import { Users, Menu, X } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-
-const logo = "https://admissions-tat-tekkzy.netlify.app/logo.png";
-
-export const NAV_LINKS = [
-  { label: "About",       href: "https://about-tat.tekkzy.com/" },
-  { label: "Admissions",  href: "https://admissions-tat.tekkzy.com/",  sub: ["How to Apply","Eligibility","Fee Structure","Scholarships","JEE / OJEE"] },
-  { label: "Academics",   href: "https://academics-tat.tekkzy.com/" },
-  { label: "Research",    href: "https://research-tat.tekkzy.com/",    sub: ["Research Centers","Publications","Projects","Collaborations","SIRO-DSIR"] },
-  { label: "Campus Life", href: "https://campuslife-tat.tekkzy.com/",  sub: ["Hostels","Sports Complex","Clubs & Fests","Cafeteria","Health Center"] },
-  { label: "Activities",  href: "https://activities-tat.tekkzy.com/",   sub: ["Clubs & Societies","Cultural Events","Technical Fests","Sports","NSS / NCC"] },
-  { label: "Contact Us",  href: "https://contactus-tat.tekkzy.com/",   sub: ["General Enquiry","Admissions Office","Placement Cell","Campus Address","Feedback"] },
-];
+import { NAV_LINKS } from "../data/constants";
+import logo from "../assets/logo.png";
 
 function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -91,7 +81,7 @@ export default function Header() {
 
           {/* Mobile Toggle */}
           <button 
-            className="lg:hidden text-[#253386] p-2 bg-soft rounded-lg hover:bg-[#253386]/10 transition-colors active:scale-95 z-50 relative" 
+            className="lg:hidden text-[#253386] p-2 bg-soft rounded-lg hover:bg-primary/10 transition-colors active:scale-95 z-50 relative" 
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle Menu"
           >
@@ -102,7 +92,7 @@ export default function Header() {
         {/* Mobile Nav */}
         <div 
           className={cn(
-            "lg:hidden absolute top-full left-0 w-full bg-white shadow-[0_30px_60px_-15px_rgba(15,23,42,0.2)] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] origin-top overflow-hidden border-t border-[#253386]/10",
+            "lg:hidden absolute top-full left-0 w-full bg-white shadow-[0_30px_60px_-15px_rgba(15,23,42,0.2)] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] origin-top overflow-hidden border-t border-primary/10",
             mobileOpen ? "max-h-[85vh] opacity-100 py-6" : "max-h-0 opacity-0 py-0 pointer-events-none"
           )}
         >
@@ -113,7 +103,7 @@ export default function Header() {
                 href={item.href} 
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  "block py-3.5 text-[15px] font-extrabold text-[#3E3A36] uppercase tracking-[0.14em] hover:text-[#253386] hover:bg-slate-50 rounded-lg px-3 transition-all duration-500 transform",
+                  "block py-3.5 text-[15px] font-extrabold text-[#3E3A36] uppercase tracking-[0.14em] hover:text-[#253386] hover:bg-soft/50 rounded-lg px-3 transition-all duration-500 transform",
                   mobileOpen ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
                 )}
                 style={{ 
@@ -141,3 +131,4 @@ export default function Header() {
     </div>
   );
 }
+

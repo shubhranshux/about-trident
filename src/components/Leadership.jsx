@@ -43,7 +43,7 @@ const Leadership = () => {
             {/* Professional Portrait Container */}
             <div className="rounded-md overflow-hidden shadow-2xl shadow-brand-primary/10 relative z-10 bg-white ring-1 ring-slate-900/5">
               <img 
-                src="https://tat.ac.in/wp-content/uploads/2026/02/Passport_Size_Photo_Final.png" 
+                src="/principal_passport.png" 
                 alt="Prof. (Dr) D. N. Pattanayak" 
                 className="w-full h-[550px] object-cover hover:scale-105 transition-transform duration-700 ease-out" 
                 style={{ objectPosition: 'center 20%' }}

@@ -9,7 +9,7 @@ import Recognitions from './components/Recognitions';
 import Leadership from './components/Leadership';
 import Success from './components/Success';
 import Compliance from './components/Compliance';
-import { Partners, Footer } from './components/Footer';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -40,9 +40,6 @@ function App() {
         </div>
         <div id="compliance">
           <Compliance />
-        </div>
-        <div id="partners">
-          <Partners />
         </div>
       </main>
       <Footer />

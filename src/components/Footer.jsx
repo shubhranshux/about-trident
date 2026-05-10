@@ -1,38 +1,7 @@
+import logo from "../assets/logo.png";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, ArrowRight } from "lucide-react";
 
-const logo = "https://admissions-tat-tekkzy.netlify.app/logo.png";
-
-const Partners = () => {
-  const partners = ["TCS", "Infosys", "Wipro", "Cognizant", "IBM", "Capgemini", "Tech Mahindra"];
-  const allPartners = [...partners, ...partners];
-
-  return (
-    <section id="partners" className="py-24 bg-white overflow-hidden border-y border-slate-100">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <span className="text-sm font-bold tracking-[3px] text-slate-400 uppercase mb-4 block">CORPORATE TIES</span>
-          <h2 className="serif-heading-vibrant">
-            Top <span className="italic text-[#253386] font-black">Recruiting</span> Partners
-          </h2>
-        </div>
-
-        <div className="relative flex overflow-x-hidden">
-          <div className="flex animate-marquee whitespace-nowrap py-12 gap-8">
-            {allPartners.map((p, i) => (
-              <div key={i} className="px-12 py-8 bg-slate-50 border border-slate-100 rounded-2xl text-2xl font-black text-slate-400 grayscale hover:grayscale-0 transition-all duration-500 hover:text-[#253386] hover:bg-white hover:shadow-xl shadow-slate-100 uppercase tracking-widest text-center min-w-[200px]">
-                {p}
-              </div>
-            ))}
-          </div>
-          <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-10" />
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Footer = function() {
+export default function Footer() {
   return (
     <footer className="bg-[#1A1817] text-[#EFE7DF]/80 pt-24 pb-12 relative overflow-hidden font-sans border-t-4 border-[#E5AA3E]">
       
@@ -81,14 +50,14 @@ const Footer = function() {
           
           {/* Brand Column */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-5 mb-10">
+            <a href="https://tat.tekkzy.com/" className="flex items-center gap-5 mb-10 hover:opacity-80 transition-opacity cursor-pointer">
               <img src={logo} alt="TAT Logo" className="w-[64px] h-[64px] object-contain" />
               <div className="h-12 w-[1px] bg-white/10 mx-2"></div>
               <div className="flex flex-col justify-center">
                 <div className="font-serif text-[28px] text-white leading-none font-black uppercase">Trident</div>
                 <div className="text-[10px] font-bold text-[#8B6E66] tracking-[.3em] uppercase mt-2">Academy of Technology</div>
               </div>
-            </div>
+            </a>
             
             <p className="text-gray-400 text-[16px] leading-[1.8] mb-10">
               Empowering the next generation of global leaders through world-class technical education, innovative research, and an unwavering commitment to excellence.
@@ -189,5 +158,3 @@ const Footer = function() {
     </footer>
   );
 }
-
-export { Partners, Footer };

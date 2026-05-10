@@ -58,16 +58,16 @@ const Compliance = () => {
               icon={FileText} 
               title="Audited Financials" 
               links={[
-                { name: "FY 2024-2025 (Provisional)", href: "https://tat.ac.in/wp-content/uploads/2025/09/PROVISIONAL-BS.pdf" },
-                { name: "FY 2023-2024", href: "https://tat.ac.in/wp-content/uploads/2024/12/D.Foundation-2023-24.pdf" }
+                { name: "FY 2024-2025 (Provisional)", href: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/PROVISIONAL-BS.pdf" },
+                { name: "FY 2023-2024", href: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/D.Foundation-2023-24.pdf" }
               ]} 
             />
             <DocItem 
               icon={Gavel} 
               title="Rules & Regulations" 
               links={[
-                { name: "Student Hand Book", href: "https://tat.ac.in/wp-content/uploads/2023/05/Student-Hand-Book-Revised.pdf" },
-                { name: "HR Policies", href: "https://tat.ac.in/wp-content/uploads/2025/08/HR-POLICY.pdf" }
+                { name: "Student Hand Book", href: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/Student-Hand-Book-Revised.pdf" },
+                { name: "HR Policies", href: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/HR-POLICY.pdf" }
               ]} 
             />
             <DocItem 
