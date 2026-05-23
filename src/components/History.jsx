@@ -1,132 +1,78 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const TimelineItem = ({ year, title, desc, index }) => (
-  <motion.div 
-    initial={{ opacity: 0, x: -20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="flex gap-8 group"
-  >
-    <div className="flex flex-col items-center">
-      <div className="w-12 h-12 rounded-full border-4 border-brand-accent bg-white flex items-center justify-center text-sm font-black text-slate-800 shrink-0 group-hover:scale-110 transition-transform duration-500">
-        {year}
-      </div>
-      <div className="w-1 h-full bg-slate-200 group-last:bg-transparent min-h-[80px]" />
-    </div>
-    <div className="pt-2">
-      <h4 className="text-xl font-black text-slate-800 mb-2">{title}</h4>
-      <p className="text-slate-600 font-semibold">{desc}</p>
-    </div>
-  </motion.div>
-);
-
 const History = () => {
   const milestones = [
-    { year: "1991", title: "Founding Spark", desc: "Incorporation of Trident Softech Private Limited by five visionary technocrats." },
-    { year: "1995", title: "Education Focus", desc: "Started as a corporate finishing school providing industry-ready tech training." },
-    { year: "2005", title: "Academy Founding", desc: "Trident Academy of Technology established as a premium degree engineering college." },
-    { year: "2023+", title: "Autonomous Journey", desc: "Continuous evolution as a UGC Autonomous institution with industry-leading placements." },
+    { year: "1991", title: "Founding Spark", desc: "Incorporation of Trident Softech Private Limited by five visionary technocrats.", img: "/visionary_meeting_journey_1774669005557.png" },
+    { year: "1995", title: "Education Focus", desc: "Started as a corporate finishing school providing industry-ready tech training.", img: "/milestones_vibrant_timeline_nodes_1774672926576.png" },
+    { year: "2005", title: "Academy Founding", desc: "Trident Academy of Technology established as a premium degree engineering college.", img: "/campus_hero_modern_1774668970671.png" },
+    { year: "2023", title: "Autonomous Journey", desc: "Continuous evolution as a UGC Autonomous institution with industry-leading placements.", img: "/vision_vibrant_colorful_students_1774672909834.png" },
   ];
 
   return (
-    <section id="milestones" className="pt-36 pb-24 bg-white relative overflow-hidden">
-      {/* Background Motifs */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-10 left-10 text-[20vw] font-black text-brand-primary/5 select-none leading-none">
-          1991
-        </div>
-        
-        {/* Architectural Grid Design */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
-          style={{ 
-            backgroundImage: `linear-gradient(#253386 1px, transparent 1px), linear-gradient(to right, #253386 1px, transparent 1px)`,
-            backgroundSize: '80px 80px' 
-          }}
-        />
-        
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{ 
-            backgroundImage: `linear-gradient(#253386 1px, transparent 1px), linear-gradient(to right, #253386 1px, transparent 1px)`,
-            backgroundSize: '20px 20px' 
-          }}
-        />
-
-        {/* Soft History Blurs */}
-        <div className="absolute top-1/2 right-[-10%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-brand-accent/10 rounded-full blur-[100px]" />
-      </div>
-
+    <section id="milestones" className="pt-24 pb-48 bg-[#FDF8EE] overflow-hidden relative bg-blueprint-subtle divider-curve-bottom z-20">
       <div className="container-custom relative z-10">
-        <div className="text-center mb-20 section-header-center">
-          <span className="text-sm font-bold tracking-[3px] text-slate-400 uppercase mb-4 block">TIMELINE</span>
-          <h2 className="serif-heading-vibrant">
-            Our <span className="text-brand-accent italic font-black">Institutional</span> Milestones
+        
+        {/* Header */}
+        <div className="mb-32 text-center flex flex-col items-center">
+          <span className="text-xs font-bold tracking-[0.4em] text-slate-400 uppercase mb-6 block">THE JOURNEY</span>
+          <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-8">
+            Our <span className="italic text-brand-primary font-light">History</span>
           </h2>
+          <div className="w-px h-16 bg-brand-primary/30" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="rounded-3xl overflow-hidden shadow-2xl relative z-10 border-8 border-slate-50">
-              <img 
-                src="/milestones_vibrant_timeline_nodes_1774672926576.png" 
-                alt="Timeline Visual" 
-                className="w-full h-[600px] object-cover" 
-              />
-            </div>
-          </motion.div>
+        {/* Vertical Timeline */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Central Architectural Line */}
+          <div className="absolute top-0 bottom-0 left-8 md:left-1/2 w-px bg-brand-primary/20 -translate-x-1/2 hidden md:block" />
 
-          <div className="space-y-0">
-            {milestones.map((m, i) => (
-              <TimelineItem key={i} index={i} {...m} />
-            ))}
+          <div className="space-y-32">
+            {milestones.map((m, i) => {
+              const isEven = i % 2 === 0;
+              return (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className={`flex flex-col md:flex-row items-center gap-12 lg:gap-24 relative ${isEven ? 'md:flex-row-reverse' : ''}`}
+                >
+                  {/* Timeline Dot (Desktop only) */}
+                  <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#FDF8EE] border-4 border-brand-primary z-20" />
+
+                  {/* Image Block */}
+                  <div className="w-full md:w-1/2 flex justify-center">
+                    <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl relative border border-brand-primary/10">
+                      <img 
+                        src={m.img} 
+                        alt={m.title} 
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" 
+                      />
+                      <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.2)] mix-blend-overlay pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className={`w-full md:w-1/2 flex flex-col relative ${isEven ? 'md:text-right md:items-end' : 'md:text-left md:items-start'} items-center text-center`}>
+                    <span className="text-[100px] md:text-[140px] font-black font-serif text-brand-yellow/30 leading-none select-none tracking-tighter absolute top-1/2 -translate-y-1/2 -z-10">
+                      {m.year}
+                    </span>
+                    <div className="relative z-10 pt-8 pb-8">
+                      <h3 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">{m.title}</h3>
+                      <p className="text-lg md:text-xl font-medium text-slate-600 leading-relaxed max-w-sm">
+                        {m.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Story Part */}
-        <div id="story" className="mt-32 grid lg:grid-cols-2 gap-20 items-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="serif-title mb-8">Rooted in <span className="italic text-brand-green">Vision</span></h2>
-            <p className="text-2xl font-black text-slate-800 mb-8 leading-snug">
-              In the winter of 1991, five young minds sparkled a revolution over a coffee table. 
-              They debated a future where world-class education wasn't just a dream, but a standard.
-            </p>
-            <p className="text-slate-600 text-lg font-semibold leading-relaxed mb-8">
-              What started as "Trident Softech Private Limited" evolved into a corporate finishing school, and eventually, the Trident Academy of Technology. Today, we stand as a testament to the power of self-financing private entrepreneurship in building high-quality infrastructure for advanced education and research.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="rounded-[40px] overflow-hidden shadow-2xl skew-y-1">
-              <img 
-                src="/visionary_meeting_journey_1774669005557.png" 
-                alt="Founding Vision" 
-                className="w-full h-[450px] object-cover" 
-              />
-            </div>
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-accent/20 rounded-full blur-3xl -z-10" />
-          </motion.div>
-        </div>
       </div>
     </section>
   );

@@ -13,37 +13,39 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <SubNav />
-      <main>
-        <div id="hero">
-          <Hero />
-        </div>
-        <div id="stats-counter">
-          <StatsCounter />
-        </div>
-        <div id="identity">
-          <Identity />
-        </div>
-        <div id="milestones">
-          <History />
-        </div>
-        <div id="academics">
-          <Recognitions />
-        </div>
-        <div id="leadership">
-          <Leadership />
-        </div>
-        <div id="success">
-          <Success />
-        </div>
-        <div id="compliance">
-          <Compliance />
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <>
+      <div className="min-h-screen bg-white">
+        <Header />
+        <SubNav />
+        <main>
+          <div id="hero">
+            <Hero />
+          </div>
+          <div id="stats-counter">
+            <StatsCounter />
+          </div>
+          <div id="identity">
+            <Identity />
+          </div>
+          <div id="milestones">
+            <History />
+          </div>
+          <div id="academics">
+            <Recognitions />
+          </div>
+          <div id="leadership">
+            <Leadership />
+          </div>
+          <div id="success">
+            <Success />
+          </div>
+          <div id="compliance">
+            <Compliance />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
 

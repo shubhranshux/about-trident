@@ -1,28 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const TestimonialCard = ({ quote, img, name, detail, color }) => {
-  const colors = {
-    green: "bg-brand-green text-white",
-    yellow: "bg-brand-accent text-brand-primary"
-  };
-
+const MinimalistQuote = ({ quote, img, name, detail, delay }) => {
   return (
     <motion.div 
-      whileHover={{ y: -10 }}
-      className={`p-12 rounded-[40px] shadow-2xl transition-all duration-500 overflow-hidden relative ${colors[color]}`}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay }}
+      className="py-12 border-b border-slate-200 flex flex-col md:flex-row gap-8 lg:gap-16 items-start md:items-center group"
     >
-      <div className="text-4xl lg:text-6xl font-black opacity-20 absolute top-8 left-8 select-none">"</div>
-      <p className="text-lg md:text-xl font-semibold leading-relaxed mb-10 relative z-10 italic">
-        {quote}
-      </p>
-      <div className="flex items-center gap-4 pt-8 border-t border-white/20">
-        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/30 shrink-0">
-          <img src={img} alt={name} className="w-full h-full object-cover" />
+      <div className="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-full overflow-hidden shadow-lg border-2 border-white">
+        <img src={img} alt={name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+      </div>
+      
+      <div className="flex-1 relative">
+        <div className="absolute -top-6 -left-4 text-6xl font-serif text-brand-primary/10 select-none -z-10 leading-none">
+          "
         </div>
-        <div>
-          <h4 className="text-xl font-black uppercase tracking-tight">{name}</h4>
-          <span className="text-sm font-bold opacity-80">{detail}</span>
+        <p className="text-2xl md:text-3xl font-serif text-slate-800 leading-relaxed italic mb-4 relative z-10">
+          {quote}
+        </p>
+        <div className="flex items-center gap-4">
+          <div className="w-8 h-px bg-brand-primary/50" />
+          <div>
+            <h4 className="text-lg font-black text-slate-900 tracking-tight">{name}</h4>
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">{detail}</span>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -31,29 +35,38 @@ const TestimonialCard = ({ quote, img, name, detail, color }) => {
 
 const Success = () => {
   return (
-    <section id="success" className="pt-36 pb-24 bg-brand-cream/40 overflow-hidden">
-      <div className="container-custom">
-        <div className="text-center mb-20 section-header-center">
-          <span className="text-sm font-bold tracking-[3px] text-slate-400 uppercase mb-4 block">STUDENT SUCCESS</span>
-          <h2 className="serif-heading-vibrant">
-            Voices of <span className="italic text-brand-green font-black">Excellence</span>
-          </h2>
+    <section id="success" className="pt-32 pb-40 bg-white overflow-hidden relative">
+      
+      {/* Subtle Texture */}
+      <div className="absolute inset-0 bg-academic-noise opacity-30 pointer-events-none" />
+
+      <div className="container-custom relative z-10">
+        <div className="mb-20">
+          <span className="text-xs font-bold tracking-[0.4em] text-slate-400 uppercase mb-4 block">STUDENT SUCCESS</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 leading-tight">
+              Voices of <br/> <span className="italic text-brand-primary font-light">Excellence</span>
+            </h2>
+            <p className="text-lg font-medium text-slate-500 max-w-sm pb-2">
+              Hear from our alumni who have gone on to shape the global technological landscape.
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
-          <TestimonialCard 
-            quote="Trident provided me with the perfect blend of technical rigor and creative freedom. The labs are truly world-class."
+        <div className="max-w-5xl mx-auto border-t border-slate-200">
+          <MinimalistQuote 
+            quote="Trident provided me with the perfect blend of technical rigor and creative freedom. The labs are truly world-class and fostered my ability to innovate."
             img="/student_rahul_sharma_cse_portrait_1775288690112.png"
             name="Rahul Sharma"
             detail="CSE, Batch of 2024"
-            color="green"
+            delay={0.1}
           />
-          <TestimonialCard 
-            quote="The faculty mentorship here is unparalleled. I was able to publish two research papers before graduating."
+          <MinimalistQuote 
+            quote="The faculty mentorship here is unparalleled. I was able to publish two research papers before graduating, which directly led to my master's acceptance."
             img="/student_anjali_priya_etc_portrait_1775288708312.png"
             name="Anjali Priya"
             detail="ETC, Batch of 2023"
-            color="yellow"
+            delay={0.2}
           />
         </div>
       </div>
