@@ -2,78 +2,152 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const History = () => {
-  const milestones = [
-    { year: "1991", title: "Founding Spark", desc: "Incorporation of Trident Softech Private Limited by five visionary technocrats.", img: "/visionary_meeting_journey_1774669005557.png" },
-    { year: "1995", title: "Education Focus", desc: "Started as a corporate finishing school providing industry-ready tech training.", img: "/milestones_vibrant_timeline_nodes_1774672926576.png" },
-    { year: "2005", title: "Academy Founding", desc: "Trident Academy of Technology established as a premium degree engineering college.", img: "/campus_hero_modern_1774668970671.png" },
-    { year: "2023", title: "Autonomous Journey", desc: "Continuous evolution as a UGC Autonomous institution with industry-leading placements.", img: "/vision_vibrant_colorful_students_1774672909834.png" },
+  const chapters = [
+    {
+      year: "1991",
+      badge: "THE SPARK",
+      title: "From a Coffee Table Conversation to an Educational Revolution",
+      text: "In 1991, five visionary young minds — including Pradipta, an Aeronautical Engineer from IIT Kanpur, and Prabir, an alumnus of Xavier's Institute of Management — gathered around a coffee table debating a bold question: Why can't India have world-class, self-financed education like Harvard, Stanford, and MIT?",
+      accent: "from-amber-500 to-orange-600",
+    },
+    {
+      year: "1995",
+      badge: "THE ACTION",
+      title: "A Movement, Not Just a Dream",
+      text: "That conversation sparked a movement. Rather than waiting for change, they acted — founding Trident Softech Private Limited (TSPL) and launching Trident's Advanced Computer Training, a corporate finishing school that trained engineers in cutting-edge software platforms like Oracle, Sybase, and DB2, fast-tracking careers in global markets.",
+      accent: "from-blue-500 to-indigo-600",
+    },
+    {
+      year: "2005",
+      badge: "THE GROWTH",
+      title: "From Training to a Full Educational Ecosystem",
+      text: "What began as a single training division grew into a full-fledged educational ecosystem. By 1998, Trident had launched its first MCA colleges, followed by a Biotechnology college in 2002, and a premier Engineering College in 2005 — each institution built on the founding belief that quality education, backed by private enterprise and world-class infrastructure, transforms lives.",
+      accent: "from-emerald-500 to-teal-600",
+    },
+    {
+      year: "2023",
+      badge: "THE VINDICATION",
+      title: "Ahead of Its Time",
+      text: "Vindicated by the Supreme Court's landmark rulings in Unni Krishnan (1993), TMA Pai Foundation, and PA Inamdar, Trident's founding vision proved ahead of its time: that self-financing private institutions are not commercialization — they are the engine of India's knowledge revolution.",
+      accent: "from-violet-500 to-purple-600",
+    },
   ];
 
   return (
-    <section id="milestones" className="pt-24 pb-48 bg-[#FDF8EE] overflow-hidden relative bg-blueprint-subtle divider-curve-bottom z-20">
+    <section id="milestones" className="pt-24 pb-32 bg-[#FDF8EE] overflow-hidden relative z-20">
       <div className="container-custom relative z-10">
         
         {/* Header */}
-        <div className="mb-32 text-center flex flex-col items-center">
-          <span className="text-xs font-bold tracking-[0.4em] text-slate-400 uppercase mb-6 block">THE JOURNEY</span>
-          <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-8">
-            Our <span className="italic text-brand-primary font-light">History</span>
-          </h2>
-          <div className="w-px h-16 bg-brand-primary/30" />
+        <div className="mb-24 text-center flex flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="text-xs font-bold tracking-[0.4em] text-slate-400 uppercase mb-6 block">THE JOURNEY</span>
+            <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-6">
+              Our <span className="italic text-brand-primary font-light">Story</span>
+            </h2>
+            <p className="text-lg text-slate-500 max-w-xl mx-auto font-medium">
+              A journey that started with a bold question and grew into an educational revolution.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Vertical Timeline */}
+        {/* Timeline */}
         <div className="relative max-w-5xl mx-auto">
-          {/* Central Architectural Line */}
-          <div className="absolute top-0 bottom-0 left-8 md:left-1/2 w-px bg-brand-primary/20 -translate-x-1/2 hidden md:block" />
+          {/* Central line */}
+          <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[2px] bg-gradient-to-b from-brand-primary/30 via-brand-accent/30 to-brand-primary/10 md:-translate-x-1/2" />
 
-          <div className="space-y-32">
-            {milestones.map((m, i) => {
+          <div className="space-y-16 md:space-y-24">
+            {chapters.map((ch, i) => {
               const isEven = i % 2 === 0;
               return (
                 <motion.div 
                   key={i}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
-                  className={`flex flex-col md:flex-row items-center gap-12 lg:gap-24 relative ${isEven ? 'md:flex-row-reverse' : ''}`}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
+                  className="relative"
                 >
-                  {/* Timeline Dot (Desktop only) */}
-                  <div className="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#FDF8EE] border-4 border-brand-primary z-20" />
-
-                  {/* Image Block */}
-                  <div className="w-full md:w-1/2 flex justify-center">
-                    <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl relative border border-brand-primary/10">
-                      <img 
-                        src={m.img} 
-                        alt={m.title} 
-                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" 
-                      />
-                      <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.2)] mix-blend-overlay pointer-events-none" />
-                    </div>
+                  {/* Timeline dot */}
+                  <div className={`absolute left-6 md:left-1/2 top-8 -translate-x-1/2 z-20`}>
+                    <div className={`w-4 h-4 rounded-full bg-gradient-to-br ${ch.accent} ring-4 ring-[#FDF8EE] shadow-lg`} />
                   </div>
 
-                  {/* Text Content */}
-                  <div className={`w-full md:w-1/2 flex flex-col relative ${isEven ? 'md:text-right md:items-end' : 'md:text-left md:items-start'} items-center text-center`}>
-                    <span className="text-[100px] md:text-[140px] font-black font-serif text-brand-yellow/30 leading-none select-none tracking-tighter absolute top-1/2 -translate-y-1/2 -z-10">
-                      {m.year}
-                    </span>
-                    <div className="relative z-10 pt-8 pb-8">
-                      <h3 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">{m.title}</h3>
-                      <p className="text-lg md:text-xl font-medium text-slate-600 leading-relaxed max-w-sm">
-                        {m.desc}
+                  {/* Content card */}
+                  <div className={`ml-16 md:ml-0 md:w-[calc(50%-40px)] ${isEven ? 'md:mr-auto md:pr-0' : 'md:ml-auto md:pl-0'}`}>
+                    <div className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] border border-slate-100 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-500 group relative overflow-hidden">
+                      
+                      {/* Accent top strip */}
+                      <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${ch.accent} transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500`} />
+                      
+                      {/* Year + Badge row */}
+                      <div className="flex items-center gap-4 mb-6">
+                        <span className="text-5xl md:text-6xl font-black font-serif text-slate-900/10 leading-none select-none">
+                          {ch.year}
+                        </span>
+                        <span className={`text-[10px] font-black tracking-[3px] uppercase bg-gradient-to-r ${ch.accent} text-white px-4 py-1.5 rounded-full`}>
+                          {ch.badge}
+                        </span>
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-4 leading-tight tracking-tight">
+                        {ch.title}
+                      </h3>
+                      
+                      {/* Text */}
+                      <p className="text-slate-600 font-medium leading-relaxed text-[15px] md:text-base">
+                        {ch.text}
                       </p>
                     </div>
                   </div>
-
                 </motion.div>
               );
             })}
           </div>
+
+          {/* Closing statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mt-24 text-center relative"
+          >
+            {/* Final timeline dot */}
+            <div className="absolute left-6 md:left-1/2 -top-4 -translate-x-1/2 z-20">
+              <div className="w-6 h-6 rounded-full bg-brand-accent ring-4 ring-[#FDF8EE] shadow-lg flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-white" />
+              </div>
+            </div>
+
+            <div className="ml-16 md:ml-0 md:max-w-2xl md:mx-auto mt-8">
+              <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-10 md:p-14 text-center shadow-2xl relative overflow-hidden">
+                {/* Decorative subtle pattern */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none"
+                     style={{
+                       backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                       backgroundSize: '24px 24px'
+                     }}
+                />
+                <p className="text-2xl md:text-3xl font-serif font-black text-white leading-snug relative z-10">
+                  Three decades on, that coffee table conversation 
+                  <span className="text-brand-accent italic"> continues to shape futures.</span>
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
       </div>
+
+      {/* Decorative background elements */}
+      <div className="absolute top-1/4 -right-32 w-80 h-80 bg-brand-accent/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-brand-primary/5 rounded-full blur-3xl pointer-events-none" />
     </section>
   );
 };

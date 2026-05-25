@@ -1,53 +1,75 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useInView, useSpring, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const StatItem = ({ target, label, suffix = "" }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  
-  const spring = useSpring(0, {
-    mass: 1,
-    stiffness: 100,
-    damping: 30,
-  });
-  
-  const displayValue = useTransform(spring, (value) => 
-    Math.floor(value).toLocaleString() + suffix
-  );
-
-  useEffect(() => {
-    if (isInView) {
-      spring.set(target);
-    }
-  }, [isInView, target, spring]);
-
+const HexagonItem = ({ topText, mainText, delay }) => {
   return (
-    <div ref={ref} className="flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm shadow-xl">
-      <motion.span className="text-4xl md:text-5xl font-black text-brand-accent mb-2">
-        {displayValue}
-      </motion.span>
-      <span className="text-slate-400 text-sm font-bold tracking-widest uppercase">
-        {label}
-      </span>
-    </div>
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, delay, type: "spring", stiffness: 100 }}
+      viewport={{ once: true }}
+      className="relative w-[280px] h-[240px] group mx-auto"
+    >
+      {/* Outer wrapper for golden border using clip-path */}
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-accent to-brand-accent/10 transition-transform duration-300 group-hover:scale-105 p-[2px]"
+           style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)' }}>
+        
+        {/* Inner hexagon (background) */}
+        <div className="w-full h-full bg-[#0B1120] flex flex-col items-center justify-center p-8 text-center relative"
+             style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)' }}>
+          
+          {/* Subtle glow on hover */}
+          <div className="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+          
+          <span className="text-slate-400 text-[11px] md:text-xs font-bold tracking-widest uppercase mb-3 z-10">
+            {topText}
+          </span>
+          <span className="text-xl md:text-2xl font-black text-brand-accent z-10 leading-tight">
+            {mainText}
+          </span>
+          
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
 const StatsCounter = () => {
   const stats = [
-    { target: 10000, label: "Alumni Worldwide", suffix: "+" },
-    { target: 30, label: "Years of Excellence", suffix: "+" },
-    { target: 150, label: "Expert Faculty", suffix: "+" },
-    { target: 100, label: "Placement Record", suffix: "%" },
+    { topText: "Established reputation", mainText: "Trusted Brand" },
+    { topText: "Holistic development", mainText: "Leaders & Humans" },
+    { topText: "Core philosophy", mainText: "Values & Sanskars" },
+    { topText: "Career readiness", mainText: "Industry-Ready" },
   ];
 
   return (
-    <section id="stats-counter" className="pt-36 pb-24 bg-slate-900 border-y border-white/5 overflow-hidden">
-      <div className="container-custom">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, i) => (
-            <StatItem key={i} {...stat} />
-          ))}
+    <section id="stats-counter" className="pt-32 pb-32 bg-[#0f172a] relative overflow-hidden">
+      {/* Honeycomb Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ 
+             backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='69.2820323027551' viewBox='0 0 40 69.2820323027551' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 17.32050807568877l-20 11.547005383792516L0 17.32050807568877V-5.773502691896258l20-11.547005383792516 20 11.547005383792516V17.32050807568877zm0 46.188021535171024l-20 11.547005383792516-20-11.547005383792516V40.41451884327476l20-11.547005383792516 20 11.547005383792516v23.094010767585032zM20 51.96152422706728l-20 11.547005383792516-20-11.547005383792516V28.86751345948126l20-11.547005383792516 20 11.547005383792516v23.094010767585032z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`
+           }} 
+      />
+      
+      {/* Subtle top and bottom borders */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent"></div>
+      
+      <div className="container-custom relative z-10 max-w-7xl mx-auto">
+        {/* Dynamic Honeycomb Wave Layout */}
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:gap-4 gap-8">
+             <div className="lg:-mt-24">
+               <HexagonItem topText={stats[0].topText} mainText={stats[0].mainText} delay={0.1} />
+             </div>
+             <div className="lg:mt-24 lg:-ml-6 z-10">
+               <HexagonItem topText={stats[1].topText} mainText={stats[1].mainText} delay={0.2} />
+             </div>
+             <div className="lg:-mt-24 lg:-ml-6 z-20">
+               <HexagonItem topText={stats[2].topText} mainText={stats[2].mainText} delay={0.3} />
+             </div>
+             <div className="lg:mt-24 lg:-ml-6 z-30">
+               <HexagonItem topText={stats[3].topText} mainText={stats[3].mainText} delay={0.4} />
+             </div>
         </div>
       </div>
     </section>

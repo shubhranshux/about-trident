@@ -5,11 +5,9 @@ const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const images = [
-    "/hero_vibrant_campus_sunset_premium_1774683689660.png",
-    "/hero_campus_realistic_daytime_1774671873536.png",
-    "/campus_hero_modern_1774668970671.png",
-    "/student_tech_lab_1774668989975.png",
-    "/vision_vibrant_colorful_students_1774672909834.png"
+    "/slider/slider 1.png",
+    "/slider/slider 2.png",
+    "/slider/slider 32.png"
   ];
 
   useEffect(() => {
@@ -79,10 +77,12 @@ const Hero = () => {
               </span>
             </div>
             
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] mb-8 drop-shadow-2xl">
-              A Legacy of <br />
-              <span className="text-brand-accent italic drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">Excellence</span>,<br />
-              A Future of Innovation.
+            <h1 className="font-serif font-black text-white leading-[1.1] mb-8 drop-shadow-2xl">
+              <span className="block text-4xl md:text-6xl lg:text-7xl mb-1">Trident Academy</span>
+              <span className="block text-4xl md:text-6xl lg:text-7xl mb-4">of Technology</span>
+              <span className="block text-brand-accent italic font-bold drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] text-3xl md:text-5xl lg:text-6xl tracking-wide">
+                Where Education Meets Excellence.
+              </span>
             </h1>
             
             <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mb-12 font-bold border-l-4 border-brand-accent pl-6 drop-shadow-xl">
@@ -96,16 +96,7 @@ const Hero = () => {
               >
                 Our Journey
               </a>
-              <a 
-                href="#stats" 
-                className="group flex items-center gap-4 text-white font-black uppercase text-[14px] tracking-wider hover:text-white/80 transition-all drop-shadow-md"
-              >
-                <div className="relative flex items-center">
-                  <div className="w-14 h-[3px] bg-white/40 group-hover:w-16 group-hover:bg-brand-accent transition-all duration-300" />
-                  <div className="absolute right-0 w-2 h-2 rounded-full bg-white/60 group-hover:bg-brand-accent opacity-0 group-hover:opacity-100 transition-all" />
-                </div>
-                View Rankings
-              </a>
+
             </div>
           </motion.div>
         </div>

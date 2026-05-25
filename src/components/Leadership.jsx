@@ -97,38 +97,61 @@ const Leadership = () => {
           </motion.div>
         </div>
 
-        {/* Governing Board */}
-        <div id="governance" className="mb-32 flex flex-col items-center text-center">
+        {/* Governing Board Table */}
+        <div id="governance" className="mb-20 flex flex-col items-center text-center">
           <span className="text-xs font-bold tracking-[0.4em] text-slate-400 uppercase mb-6 block">GOVERNANCE</span>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-black text-slate-900 mb-8">
-            Board of <span className="italic text-brand-primary">Directors</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-slate-900 mb-8">
+            Governing <span className="italic text-brand-primary">Board</span>
           </h2>
-          <div className="w-px h-16 bg-brand-primary/30" />
+          <div className="w-px h-12 bg-brand-primary/30" />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12 lg:gap-20">
-          <BoardPortrait 
-            img="/chairperson_panigrahi_1775112672468.png"
-            name="Smt. S. Panigrahi"
-            role="Chairperson"
-            desc="Trustee – D. Foundation"
-            delay={0}
-          />
-          <BoardPortrait 
-            img="/member_nanda_portrait_1775112695824.png"
-            name="Dr. B. K. Nanda"
-            role="Member"
-            desc="Ex-Vice Chancellor, VSSUT, Burla (Ph.D, Mechanical)"
-            delay={0.1}
-          />
-          <BoardPortrait 
-            img="https://tat.ac.in/wp-content/uploads/2026/02/Passport_Size_Photo_Final.png"
-            name="Prof. (Dr) D. N. Pattanayak"
-            role="Member Secretary"
-            desc="Principal (Ph.D, JU, Electrical Engg)"
-            delay={0.2}
-          />
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="w-full max-w-6xl mx-auto bg-white rounded-3xl shadow-[0_15px_60px_-15px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden"
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse min-w-[900px]">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-200">
+                  <th className="py-5 px-6 font-bold text-slate-700 text-sm tracking-wider uppercase whitespace-nowrap w-[80px]">Sl. no</th>
+                  <th className="py-5 px-6 font-bold text-slate-700 text-sm tracking-wider uppercase">Members</th>
+                  <th className="py-5 px-6 font-bold text-slate-700 text-sm tracking-wider uppercase">Academic background<br/><span className="text-brand-primary">(Technical)</span></th>
+                  <th className="py-5 px-6 font-bold text-slate-700 text-sm tracking-wider uppercase">Academic background<br/><span className="text-brand-accent">(Non-technical)</span></th>
+                  <th className="py-5 px-6 font-bold text-slate-700 text-sm tracking-wider uppercase">Industry type</th>
+                  <th className="py-5 px-6 font-bold text-slate-700 text-sm tracking-wider uppercase">Others</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {[
+                  { id: 1, name: "Smt. S. Panigrahi", role: "Trustee – D. Foundation (Chairperson)", tech: "", nonTech: "M.Sc. (Life Science)", ind: "", oth: "" },
+                  { id: 2, name: "Dr. B. K. Nanda", role: "Ex-Vice Chancellor, VSSUT, Burla", tech: "Ph. D (Mechanical)", nonTech: "", ind: "", oth: "" },
+                  { id: 3, name: "Sri. K. K. Mishra", role: "Retd. General Manager, Indian Rlys", tech: "B.Tech (Civil), IIT, Kharagpur", nonTech: "", ind: "", oth: "" },
+                  { id: 4, name: "Sri S. Mishra", role: "Managing Director, SPARC(p) Ltd.", tech: "B.Tech (Gold Medallist), NIT Kurukhsetra", nonTech: "", ind: "", oth: "" },
+                  { id: 5, name: "Prof. (Dr.) Sakuntala Mahapatra", role: "Dean (SoE)", tech: "Ph.D (Electronics)", nonTech: "", ind: "", oth: "" },
+                  { id: 6, name: "Prof. (Dr) D. N. Pattanayak", role: "Principal and Member Secretary (GB)", tech: "Ph.D, JU, (Electrical Engg)", nonTech: "", ind: "", oth: "" },
+                  { id: 7, name: "Prof. (Dr.) Amarendra Baral", role: "Dean (SSH)", tech: "", nonTech: "Ph.D. (Mathematics)", ind: "", oth: "" },
+                  { id: 8, name: "Mr. Ashok Kumar Sarangi", role: "Asst. Professor", tech: "", nonTech: "M.Sc. (Biotechnology)", ind: "", oth: "" },
+                ].map((row, index) => (
+                  <tr key={index} className="hover:bg-brand-primary/[0.02] transition-colors group">
+                    <td className="py-5 px-6 text-sm font-semibold text-slate-400 group-hover:text-brand-primary transition-colors">{row.id}</td>
+                    <td className="py-5 px-6">
+                      <div className="font-bold text-slate-900 mb-1">{row.name}</div>
+                      <div className="text-sm font-medium text-slate-500">{row.role}</div>
+                    </td>
+                    <td className="py-5 px-6 text-sm font-medium text-slate-600">{row.tech || <span className="text-slate-300">-</span>}</td>
+                    <td className="py-5 px-6 text-sm font-medium text-slate-600">{row.nonTech || <span className="text-slate-300">-</span>}</td>
+                    <td className="py-5 px-6 text-sm font-medium text-slate-600">{row.ind || <span className="text-slate-300">-</span>}</td>
+                    <td className="py-5 px-6 text-sm font-medium text-slate-600">{row.oth || <span className="text-slate-300">-</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

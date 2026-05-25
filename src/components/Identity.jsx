@@ -36,18 +36,11 @@ const Identity = () => {
               <span className="text-gradient">Excellence.</span>
             </h2>
             
-            <p className="text-xl font-medium text-slate-600 leading-relaxed mb-12">
-              Established in 2005, Trident Academy of Technology has been the cornerstone of technical education in Odisha, fostering minds that lead the global technological revolution.
+            <p className="text-lg md:text-xl font-medium text-slate-600 leading-relaxed mb-12">
+              Established in 2005, Trident Academy of Technology has rapidly become one of the most respected names in technical education in Odisha and India — a reputation built not on marketing, but on measurable outcomes and unwavering commitment to quality. Our campus thrives on intellectual curiosity, collaborative energy, and a belief that the most powerful education lives at the intersection of rigorous academics and genuine passion. What truly sets Trident apart is our holistic approach: we nurture character alongside competence, shaping graduates who carry strong values and sanskars alongside technical expertise — producing not just industry-ready professionals, but compassionate, principled leaders prepared to drive the global technological revolution.
             </p>
 
-            {/* Stunning Glassmorphism Detail Box */}
-            <div className="glass-panel p-8 md:p-12 relative translate-y-10 z-20 max-w-lg animate-float">
-              <div className="absolute top-0 left-0 w-1/3 h-1 bg-gradient-to-r from-brand-accent to-brand-primary rounded-tl-[40px]" />
-              <h3 className="text-3xl font-black font-serif text-slate-900 mb-4">Our Vision</h3>
-              <p className="text-slate-600 font-medium leading-relaxed">
-                To be a premier institution of technical education and research, creating globally competent professionals with strong ethical values.
-              </p>
-            </div>
+
           </motion.div>
 
           <motion.div 
@@ -64,8 +57,8 @@ const Identity = () => {
               
               <div className="w-full aspect-[4/5] rounded-[40px] overflow-hidden relative border border-white/50 shadow-2xl">
                 <img 
-                  src="/vision_vibrant_colorful_students_1774672909834.png" 
-                  alt="Students collaborating" 
+                  src="/Gemini_Generated_Image_e1ma6xe1ma6xe1ma.png" 
+                  alt="Students collaborating in modern campus" 
                   className="w-full h-full object-cover transition-all duration-1000 ease-out hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/40 to-transparent pointer-events-none" />

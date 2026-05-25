@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import SubNav from './components/SubNav';
 import StatsCounter from './components/StatsCounter';
 import Identity from './components/Identity';
+import VisionMission from './components/VisionMission';
 import History from './components/History';
 import Recognitions from './components/Recognitions';
 import Leadership from './components/Leadership';
@@ -26,6 +27,9 @@ function App() {
           </div>
           <div id="identity">
             <Identity />
+          </div>
+          <div id="vision-mission">
+            <VisionMission />
           </div>
           <div id="milestones">
             <History />
