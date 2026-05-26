@@ -1,7 +1,9 @@
-import logo from "../assets/logo.png";
+import React from 'react';
 import { FadeInUp } from "../utils/animations";
-
 import { Mail, Phone, MapPin, Facebook, Linkedin, Instagram, ArrowRight, Youtube } from "lucide-react";
+
+// Assuming logo is in public folder or available
+const logo = "/logo.png"; 
 
 const XIcon = ({ size = 20, className = "" }) => (
   <svg 
@@ -30,8 +32,6 @@ export default function Footer() {
 
       <div className="max-w-[1400px] mx-auto px-6 xl:px-12 relative z-10">
         
-
-
         <FadeInUp>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
             
@@ -65,7 +65,6 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-
 
             {/* Links Columns */}
             <div className="lg:col-span-8 grid grid-cols-2 lg:grid-cols-3 gap-12">

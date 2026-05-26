@@ -1,72 +1,72 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { gsap, ScrollTrigger } from '../lib/gsap-setup';
+import { TextReveal, MaskReveal, ScrollScale } from '../utils/animations';
 
 const Identity = () => {
-  return (
-    <section id="identity" className="pt-32 pb-48 bg-white relative divider-slant-bottom z-10 overflow-hidden">
-      
-      {/* Animated Glowing Orbs Background */}
-      <div className="glow-orb-1" />
-      <div className="glow-orb-2" />
+  const sectionRef = useRef(null);
 
-      {/* Creative Watermark Background */}
-      <div className="absolute top-0 right-0 w-1/2 h-full overflow-hidden pointer-events-none opacity-[0.03] select-none">
-        <h2 className="text-[300px] font-black font-serif text-brand-primary leading-none -rotate-90 origin-bottom-right translate-x-32 translate-y-32 text-gradient">
-          TRIDENT
-        </h2>
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.identity-accent', {
+        scaleX: 0,
+        duration: 1.5,
+        ease: 'expo.out',
+        stagger: 0.2,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', once: true },
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="py-32 md:py-44 relative overflow-hidden" style={{ backgroundColor: '#F5F2EB' }}>
+      
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.03]">
+        <span className="text-[25vw] font-black font-serif text-slate-900 leading-none block whitespace-nowrap">LEGACY</span>
       </div>
 
+      {/* Thick oblique elements */}
+      <div className="identity-accent absolute top-[0%] right-[-10%] w-[120%] h-[100px] bg-amber-700/5 rotate-[-8deg] origin-left pointer-events-none" />
+      <div className="identity-accent absolute bottom-[10%] left-[-10%] w-[150%] h-[60px] bg-emerald-700/5 rotate-[15deg] origin-right pointer-events-none" />
+      <div className="identity-accent absolute top-[40%] right-[-20%] w-[80%] h-[80px] bg-slate-400/10 rotate-[-30deg] pointer-events-none" />
+
       <div className="container-custom relative z-10">
-        
-        {/* Asymmetric Top Grid */}
+        <span className="editorial-label text-slate-500 mb-16 block">OUR IDENTITY</span>
+
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
           
-          <motion.div 
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-6 flex justify-center lg:justify-start"
-          >
-            {/* Immersive Image with Glowing Drop Shadow */}
-            <div className="relative w-full h-[500px] lg:h-[650px]">
-              {/* Animated Glow behind the image */}
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-primary to-brand-accent rounded-[40px] blur-2xl opacity-30 animate-pulse" />
-              
-              <div className="w-full h-full rounded-[40px] overflow-hidden relative border border-white/50 shadow-2xl">
-                <img 
-                  src="/Gemini_Generated_Image_e1ma6xe1ma6xe1ma.png" 
-                  alt="Students collaborating in modern campus" 
-                  className="w-full h-full object-cover object-left transition-all duration-1000 ease-out hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/40 to-transparent pointer-events-none" />
+          <div className="lg:col-span-5">
+            <ScrollScale from={1} to={1.04} className="w-full">
+              <div className="relative p-3 bg-white shadow-xl">
+                <div className="aspect-[3/4] overflow-hidden relative">
+                  <img 
+                    src="/Gemini_Generated_Image_e1ma6xe1ma6xe1ma.png" 
+                    alt="Students collaborating" 
+                    className="w-full h-full object-cover object-left"
+                  />
+                  <div className="absolute inset-0 bg-[#F5F2EB]/10 mix-blend-multiply pointer-events-none" />
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </ScrollScale>
+          </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-6 relative lg:pl-12"
-          >
-            {/* Minimalist Line Divider */}
-            <div className="w-24 h-1 bg-gradient-to-r from-brand-primary to-brand-accent mb-8" />
+          <div className="lg:col-span-7">
+            <div className="w-24 h-[2px] bg-slate-900/20 mb-10" />
             
-            <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 mb-10 leading-tight">
-              A Legacy of <br />
-              <span className="text-gradient">Excellence.</span>
-            </h2>
+            <TextReveal className="mb-10" stagger={0.02}>
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-black text-slate-900 leading-[0.95] tracking-tight">
+                A Legacy of<br />
+                <span className="text-brand-primary italic font-light">Excellence.</span>
+              </h2>
+            </TextReveal>
             
-            <p className="text-lg md:text-xl font-medium text-slate-600 leading-relaxed mb-12">
-              Established in 2005, Trident Academy of Technology has rapidly become one of the most respected names in technical education in Odisha and India — a reputation built not on marketing, but on measurable outcomes and unwavering commitment to quality. Our campus thrives on intellectual curiosity, collaborative energy, and a belief that the most powerful education lives at the intersection of rigorous academics and genuine passion. What truly sets Trident apart is our holistic approach: we nurture character alongside competence, shaping graduates who carry strong values and sanskars alongside technical expertise — producing not just industry-ready professionals, but compassionate, principled leaders prepared to drive the global technological revolution.
-            </p>
-
-          </motion.div>
-
+            <MaskReveal delay={200}>
+              <p className="editorial-drop-cap text-lg md:text-xl text-slate-700 leading-[1.9] font-medium max-w-2xl">
+                Established in 2005, Trident Academy of Technology has rapidly become one of the most respected names in technical education in Odisha and India — a reputation built not on marketing, but on measurable outcomes and unwavering commitment to quality. Our campus thrives on intellectual curiosity, collaborative energy, and a belief that the most powerful education lives at the intersection of rigorous academics and genuine passion. What truly sets Trident apart is our holistic approach: we nurture character alongside competence, shaping graduates who carry strong values and sanskars alongside technical expertise — producing not just industry-ready professionals, but compassionate, principled leaders prepared to drive the global technological revolution.
+              </p>
+            </MaskReveal>
+          </div>
         </div>
-
       </div>
     </section>
   );

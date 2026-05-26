@@ -11,6 +11,12 @@
   --bg-soft: #F0F4F8;
   --text-dark: #1E293B;
   --brand-glow: rgba(44, 58, 140, 0.15);
+  --brand-gold: #E8BD63;
+  --brand-navy: #2C3A8C;
+  --editorial-cream: #FDF6E9;
+  --editorial-slate: #F0F3F7;
+  --editorial-dark: #1A1817;
+  --editorial-midnight: #0B1433;
 }
 
 @layer base {
@@ -22,8 +28,23 @@
     font-size: 18px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
     overflow-x: hidden;
+  }
+
+  /* Remove default scroll-behavior since Lenis handles it */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Lenis body requirements */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
   }
 }
 
@@ -66,6 +87,67 @@ h1, h2, h3, h4 {
     @apply bg-[#1A1817]/60 backdrop-blur-3xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] rounded-[40px];
   }
 
+  /* ═══════════════════════════════════════
+     EDITORIAL BACKGROUND PALETTES
+     ═══════════════════════════════════════ */
+  .bg-editorial-cream {
+    background-color: var(--editorial-cream);
+  }
+  .bg-editorial-slate {
+    background-color: var(--editorial-slate);
+  }
+  .bg-editorial-dark {
+    background-color: var(--editorial-dark);
+    color: #EFE7DF;
+  }
+  .bg-editorial-midnight {
+    background-color: var(--editorial-midnight);
+    color: #EFE7DF;
+  }
+
+  /* ═══════════════════════════════════════
+     DIAGONAL ACCENT LINES
+     Bold decorative geometric stripes
+     ═══════════════════════════════════════ */
+  .diagonal-accent {
+    position: absolute;
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brand-gold), transparent);
+    transform: rotate(-35deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .diagonal-accent-reverse {
+    position: absolute;
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--brand-gold));
+    transform: rotate(35deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .diagonal-accent-long {
+    position: absolute;
+    width: 400px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--brand-gold), var(--brand-navy), transparent);
+    transform: rotate(-25deg);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+  .diagonal-accent-thick {
+    position: absolute;
+    width: 300px;
+    height: 6px;
+    background: var(--brand-gold);
+    transform: rotate(-45deg);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.15;
+  }
+
   /* Animated Glowing Orbs Background */
   .glow-orb-1 {
     position: absolute;
@@ -98,7 +180,138 @@ h1, h2, h3, h4 {
     100% { transform: translate(100px, 50px) scale(1.1); }
   }
 
-  /* Creative Section Dividers */
+  /* ═══════════════════════════════════════
+     MAGAZINE BUTTONS
+     Bold, thick-border, hover-fill effect
+     ═══════════════════════════════════════ */
+  .btn-magazine {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 44px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border: 3px solid currentColor;
+    background: transparent;
+    color: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+  }
+  .btn-magazine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    transform: translateY(101%);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: -1;
+  }
+  .btn-magazine:hover::before {
+    transform: translateY(0);
+  }
+  .btn-magazine:hover {
+    color: #fff;
+  }
+  .btn-magazine span {
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: difference;
+  }
+
+  .btn-magazine-gold {
+    color: var(--brand-gold);
+    border-color: var(--brand-gold);
+  }
+  .btn-magazine-gold::before {
+    background: var(--brand-gold);
+  }
+  .btn-magazine-gold:hover {
+    color: #1A1817;
+  }
+
+  .btn-magazine-white {
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.5);
+  }
+  .btn-magazine-white::before {
+    background: #ffffff;
+  }
+  .btn-magazine-white:hover {
+    color: #1A1817;
+  }
+
+  .btn-magazine-dark {
+    color: #1A1817;
+    border-color: #1A1817;
+  }
+  .btn-magazine-dark::before {
+    background: #1A1817;
+  }
+  .btn-magazine-dark:hover {
+    color: #ffffff;
+  }
+
+  /* ═══════════════════════════════════════
+     EDITORIAL DROP CAP
+     Magazine first-letter styling
+     ═══════════════════════════════════════ */
+  .editorial-drop-cap::first-letter {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 900;
+    font-size: 4.5em;
+    line-height: 0.8;
+    float: left;
+    margin-right: 12px;
+    margin-top: 6px;
+    color: var(--brand-navy);
+  }
+
+  /* ═══════════════════════════════════════
+     EDITORIAL LABEL — "ISSUE / SECTION" style
+     ═══════════════════════════════════════ */
+  .editorial-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: currentColor;
+    opacity: 0.6;
+  }
+  .editorial-label::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  /* ═══════════════════════════════════════
+     DOT PATTERN OVERLAY
+     Subtle background texture
+     ═══════════════════════════════════════ */
+  .bg-dots-light {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+    background-size: 32px 32px;
+  }
+  .bg-dots-dark {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+    background-size: 32px 32px;
+  }
+
+  /* ═══════════════════════════════════════
+     CREATIVE SECTION DIVIDERS (Legacy clip-path)
+     ═══════════════════════════════════════ */
   .divider-slant-bottom {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 6vw));
     padding-bottom: calc(6vw + 6rem);
@@ -118,5 +331,16 @@ h1, h2, h3, h4 {
   @keyframes subtleFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
+  }
+
+  /* ═══════════════════════════════════════
+     SCROLL-LINKED GRAYSCALE TRANSITION
+     ═══════════════════════════════════════ */
+  .grayscale-scroll {
+    filter: grayscale(1);
+    transition: filter 0.8s ease-out;
+  }
+  .grayscale-scroll.is-active {
+    filter: grayscale(0);
   }
 }

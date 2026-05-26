@@ -1,76 +1,111 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { gsap } from '../lib/gsap-setup';
+import { TextReveal, MaskReveal, StaggerChildren } from '../utils/animations';
 
 const VisionMission = () => {
+  const sectionRef = useRef(null);
+
   const missions = [
-    "To foster holistic excellence in the new generation of students.",
-    "To instill in them, the power of aggressive positive thinking, insatiable desire for information and knowledge, a penchant for out-of-the box ideation and capacity of execution.",
-    "To contribute to the society with honesty and integrity through innovative research in the multi-disciplinary areas of evolving and upcoming technologies."
+    {
+      title: "Holistic Excellence",
+      text: "To foster holistic excellence in the new generation of students, nurturing both their academic brilliance and human values."
+    },
+    {
+      title: "Aggressive Ideation",
+      text: "To instill the power of aggressive positive thinking, an insatiable desire for knowledge, and a penchant for out-of-the-box ideation."
+    },
+    {
+      title: "Societal Impact",
+      text: "To contribute to society with honesty and integrity through innovative research in multi-disciplinary areas of evolving technologies."
+    }
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.mission-line', {
+        scaleX: 0,
+        duration: 1.5,
+        ease: 'expo.out',
+        stagger: 0.2,
+        scrollTrigger: { trigger: '.missions-container', start: 'top 80%', once: true }
+      });
+      
+      gsap.from('.mission-number', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        stagger: 0.2,
+        scrollTrigger: { trigger: '.missions-container', start: 'top 80%', once: true }
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
+    <section ref={sectionRef} className="py-32 md:py-44 relative overflow-hidden" style={{ backgroundColor: '#E3DEC6' }}>
+
+      {/* Thick background diagonals - solid colors */}
+      <div className="absolute top-[-5%] left-[-10%] w-[130%] h-[120px] bg-[#D9D3B9] rotate-[-15deg] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-20%] w-[100%] h-[70px] bg-[#CFCAA9] rotate-[25deg] pointer-events-none" />
+      <div className="absolute top-[70%] left-[-10%] w-[120%] h-[50px] bg-[#C5C09A] rotate-[-5deg] pointer-events-none" />
+
+      {/* Watermark Background Typography */}
+      <div className="absolute top-[10%] right-0 -translate-y-1/2 pointer-events-none select-none opacity-[0.03] overflow-hidden">
+        <span className="text-[40vw] font-black font-serif text-slate-900 leading-none block -mr-20">V&M</span>
+      </div>
+
       <div className="container-custom relative z-10">
         
-        {/* Vision Section */}
-        <div className="max-w-4xl mx-auto text-center mb-32">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center justify-center gap-4 mb-8">
-              <span className="w-16 h-[3px] bg-brand-accent rounded-full"></span>
-              <h2 className="text-sm md:text-base font-black tracking-[5px] text-brand-primary uppercase">Our Vision</h2>
-              <span className="w-16 h-[3px] bg-brand-accent rounded-full"></span>
-            </div>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-black text-slate-900 leading-tight">
-              "To become a sustainable institution of excellence, advancing innovative education, research and development."
-            </h3>
-          </motion.div>
-        </div>
-
-        {/* Mission Section */}
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-6 mb-16">
-            <h2 className="text-3xl md:text-4xl font-black font-serif text-slate-900">Our Mission</h2>
-            <div className="h-[2px] flex-1 bg-gradient-to-r from-slate-200 to-transparent"></div>
+        {/* VISION SECTION - Massive Statement */}
+        <div className="max-w-6xl mb-32 md:mb-48 relative">
+          <div className="flex items-center gap-6 mb-12">
+            <span className="editorial-label text-slate-500 block">OUR VISION</span>
+            <div className="flex-1 h-px bg-slate-900/10"></div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="pl-0 md:pl-16 lg:pl-32 border-l-4 border-slate-900">
+            <TextReveal stagger={0.015}>
+              <h3 className="text-4xl md:text-6xl lg:text-7xl font-serif font-black text-slate-900 leading-[1.05] tracking-tight">
+                To become a sustainable institution of excellence, <span className="italic font-light text-slate-600">advancing innovative education,</span> research and development.
+              </h3>
+            </TextReveal>
+          </div>
+        </div>
+
+        {/* MISSION SECTION - Swiss Grid Layout */}
+        <div className="missions-container relative">
+          <div className="flex justify-between items-end mb-16">
+            <TextReveal delay={200}>
+              <h2 className="text-4xl md:text-5xl font-black font-serif text-slate-900">
+                Our <span className="italic text-slate-600 font-light">Mission</span>
+              </h2>
+            </TextReveal>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
             {missions.map((mission, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-white p-8 md:p-10 rounded-2xl shadow-[0_15px_50px_-15px_rgba(0,0,0,0.05)] border border-slate-100 relative group hover:-translate-y-2 transition-all duration-300"
-              >
-                {/* Decorative top bar */}
-                <div className="absolute top-0 right-10 w-12 h-1.5 bg-brand-accent rounded-b-md transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+              <div key={index} className="relative group">
+                <div className="mission-line w-full h-[2px] bg-slate-900 origin-left mb-8 transition-colors duration-500 group-hover:bg-brand-primary" />
                 
-                {/* Number Badge */}
-                <div className="w-16 h-16 rounded-2xl bg-brand-primary/5 text-brand-primary flex items-center justify-center text-3xl font-black mb-8 group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300 shadow-sm">
-                  0{index + 1}
+                <div className="flex flex-col h-full">
+                  <div className="mission-number text-7xl md:text-8xl font-serif font-black text-slate-900/10 leading-none mb-6 group-hover:text-brand-primary/20 transition-colors duration-500">
+                    0{index + 1}
+                  </div>
+                  
+                  <h4 className="text-2xl font-black text-slate-900 mb-4 tracking-tight">
+                    {mission.title}
+                  </h4>
+                  
+                  <p className="text-slate-700 font-medium leading-relaxed">
+                    {mission.text}
+                  </p>
                 </div>
-                
-                {/* Mission Text */}
-                <p className="text-slate-600 font-medium leading-relaxed text-lg">
-                  {mission}
-                </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
-      </div>
-      
-      {/* Decorative background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-[0.02]">
-        <div className="absolute top-1/4 -right-64 w-96 h-96 rounded-full bg-brand-primary blur-3xl"></div>
-        <div className="absolute bottom-1/4 -left-64 w-96 h-96 rounded-full bg-brand-accent blur-3xl"></div>
       </div>
     </section>
   );

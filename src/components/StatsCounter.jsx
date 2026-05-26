@@ -1,75 +1,79 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-
-const HexagonItem = ({ topText, mainText, delay }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, delay, type: "spring", stiffness: 100 }}
-      viewport={{ once: true }}
-      className="relative w-[280px] h-[240px] group mx-auto"
-    >
-      {/* Outer wrapper for golden border using clip-path */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-accent to-brand-accent/10 transition-transform duration-300 group-hover:scale-105 p-[2px]"
-           style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)' }}>
-        
-        {/* Inner hexagon (background) */}
-        <div className="w-full h-full bg-[#0B1120] flex flex-col items-center justify-center p-8 text-center relative"
-             style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)' }}>
-          
-          {/* Subtle glow on hover */}
-          <div className="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-          
-          <span className="text-slate-400 text-[11px] md:text-xs font-bold tracking-widest uppercase mb-3 z-10">
-            {topText}
-          </span>
-          <span className="text-xl md:text-2xl font-black text-brand-accent z-10 leading-tight">
-            {mainText}
-          </span>
-          
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+import React, { useRef, useEffect } from 'react';
+import { gsap, ScrollTrigger } from '../lib/gsap-setup';
 
 const StatsCounter = () => {
+  const sectionRef = useRef(null);
+
   const stats = [
-    { topText: "Established reputation", mainText: "Trusted Brand" },
-    { topText: "Holistic development", mainText: "Leaders & Humans" },
-    { topText: "Core philosophy", mainText: "Values & Sanskars" },
-    { topText: "Career readiness", mainText: "Industry-Ready" },
+    { label: "Trusted Brand", sub: "Established reputation across India" },
+    { label: "Leaders & Humans", sub: "Holistic development beyond academics" },
+    { label: "Values & Sanskars", sub: "Core philosophy shaping character" },
+    { label: "Industry-Ready", sub: "Career readiness from day one" },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.stat-item').forEach((item, i) => {
+        gsap.from(item, {
+          opacity: 0,
+          y: 80,
+          duration: 1,
+          delay: i * 0.15,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: item, start: 'top 85%', once: true },
+        });
+      });
+      gsap.from('.stat-divider', {
+        scaleY: 0,
+        duration: 1.2,
+        ease: 'expo.out',
+        stagger: 0.1,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 70%', once: true },
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="stats-counter" className="pt-32 pb-32 bg-[#0f172a] relative overflow-hidden">
-      {/* Honeycomb Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ 
-             backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='69.2820323027551' viewBox='0 0 40 69.2820323027551' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 17.32050807568877l-20 11.547005383792516L0 17.32050807568877V-5.773502691896258l20-11.547005383792516 20 11.547005383792516V17.32050807568877zm0 46.188021535171024l-20 11.547005383792516-20-11.547005383792516V40.41451884327476l20-11.547005383792516 20 11.547005383792516v23.094010767585032zM20 51.96152422706728l-20 11.547005383792516-20-11.547005383792516V28.86751345948126l20-11.547005383792516 20 11.547005383792516v23.094010767585032z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`
-           }} 
+    <section ref={sectionRef} className="py-32 md:py-44 relative overflow-hidden" style={{ backgroundColor: '#14191F' }}>
+      
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-[1]" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm20 20h20v20H20V20zM0 20h20v20H0V20z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")` }} 
       />
-      
-      {/* Subtle top and bottom borders */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent"></div>
-      
-      <div className="container-custom relative z-10 max-w-7xl mx-auto">
-        {/* Dynamic Honeycomb Wave Layout */}
-        <div className="flex flex-col lg:flex-row justify-center items-center lg:gap-4 gap-8">
-             <div className="lg:-mt-24">
-               <HexagonItem topText={stats[0].topText} mainText={stats[0].mainText} delay={0.1} />
-             </div>
-             <div className="lg:mt-24 lg:-ml-6 z-10">
-               <HexagonItem topText={stats[1].topText} mainText={stats[1].mainText} delay={0.2} />
-             </div>
-             <div className="lg:-mt-24 lg:-ml-6 z-20">
-               <HexagonItem topText={stats[2].topText} mainText={stats[2].mainText} delay={0.3} />
-             </div>
-             <div className="lg:mt-24 lg:-ml-6 z-30">
-               <HexagonItem topText={stats[3].topText} mainText={stats[3].mainText} delay={0.4} />
-             </div>
+
+      {/* Thick diagonal lines - solid colors */}
+      <div className="absolute top-[5%] left-[-10%] w-[120%] h-[70px] bg-[#181D24] rotate-[-12deg] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[80%] h-[90px] bg-[#1C2229] rotate-[30deg] pointer-events-none" />
+      <div className="absolute top-[60%] left-[-20%] w-[140%] h-[50px] bg-[#20272E] rotate-[-20deg] pointer-events-none" />
+
+      <div className="container-custom relative z-10">
+        <div className="text-center mb-20">
+          <span className="editorial-label text-slate-400 justify-center mb-6 block">WHAT DEFINES US</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+          {stats.map((stat, i) => (
+            <div key={i} className="stat-item relative flex flex-col items-center text-center py-12 px-6 group">
+              {i > 0 && (
+                <div className="stat-divider hidden lg:block absolute left-0 top-[15%] bottom-[15%] w-px bg-white/10 origin-top" />
+              )}
+              
+              <span className="text-8xl md:text-9xl font-black font-serif text-white/[0.03] leading-none absolute top-4 select-none pointer-events-none transition-colors duration-500 group-hover:text-white/[0.05]">
+                0{i + 1}
+              </span>
+
+              <div className="w-2 h-2 rounded-full bg-slate-600 mb-8 transition-colors duration-500 group-hover:bg-brand-gold" />
+              
+              <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight leading-tight">
+                {stat.label}
+              </h3>
+              <p className="text-slate-400 text-sm font-medium tracking-wide uppercase leading-relaxed">
+                {stat.sub}
+              </p>
+
+              <div className="w-12 h-[2px] bg-slate-700 mt-8 transition-colors duration-500 group-hover:bg-brand-gold/50" />
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -12,12 +12,14 @@ const SubNav = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const links = [
-    { name: 'Stats', id: 'stats-counter' },
-    { name: 'Vision', id: 'identity' },
-    { name: 'History', id: 'milestones' },
+    { name: 'Core Values', id: 'stats-counter' },
+    { name: 'Legacy', id: 'identity' },
+    { name: 'Vision', id: 'vision-mission' },
+    { name: 'Journey', id: 'milestones' },
+    { name: 'Recognitions', id: 'academics' },
     { name: 'Leadership', id: 'leadership' },
     { name: 'Success', id: 'success' },
-    { name: 'Partners', id: 'partners' },
+    { name: 'Compliance', id: 'compliance' },
   ];
 
   useEffect(() => {
