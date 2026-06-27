@@ -84,17 +84,17 @@ const Success = () => {
 
         <div className="max-w-5xl mx-auto">
           <MinimalistQuote 
-            quote="Trident provided me with the perfect blend of technical rigor and creative freedom. The labs are truly world-class and fostered my ability to innovate."
-            img="/student_rahul_sharma_cse_portrait_1775288690112.png"
-            name="Rahul Sharma"
-            detail="CSE, Batch of 2024"
+            quote="I take this opportunity to express my heartfelt gratitude to my alma mater for shaping me as a competent professional and a good human being. The journey from being a student in Trident to the corporate world has been breathtaking."
+            img="/alumni_abinash_das.jpg"
+            name="Abinash Das"
+            detail="Technical Lead & Offshore Lead at Intel — CSE, 2006–2010"
             index={0}
           />
           <MinimalistQuote 
-            quote="The faculty mentorship here is unparalleled. I was able to publish two research papers before graduating, which directly led to my master's acceptance."
-            img="/student_anjali_priya_etc_portrait_1775288708312.png"
-            name="Anjali Priya"
-            detail="ETC, Batch of 2023"
+            quote="Trident Academy of Technology has grown immensely since its inception. Kudos to the Management Team and the Faculty to have inspired students and helped them achieve success."
+            img="/alumni_smaranika_das.jpg"
+            name="Smaranika Das"
+            detail="Software Engineer at Google — BME, 2005–2009"
             index={1}
           />
         </div>

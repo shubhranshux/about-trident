@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextReveal, StaggerChildren, MagneticButton } from '../utils/animations';
 
 const Compliance = () => {
+  const [showPolicies, setShowPolicies] = useState(false);
+
   const documents = [
     { title: "AICTE Approval Letters", desc: "Mandatory disclosures and yearly approval extensions", year: "2023-24" },
     { title: "BPUT Affiliation", desc: "Permanent affiliation certificates from Biju Patnaik University of Technology", year: "2023" },
@@ -9,6 +11,28 @@ const Compliance = () => {
     { title: "NAAC Assessment", desc: "Grade and institutional assessment metrics", year: "A Grade" },
     { title: "Audit Reports", desc: "Annual financial statements and academic audits", year: "2022-23" },
     { title: "Anti-Ragging Policy", desc: "UGC guidelines and committee details", year: "Updated" }
+  ];
+
+  const policies = [
+    { title: "Zero Emission Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Zero-Emission-Policy.pdf" },
+    { title: "Energy Conservation Pledge", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Energy-Conservation-Pledge.pdf" },
+    { title: "Sustainable Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Sustainable-Policy.pdf" },
+    { title: "Start-up Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Start-up-Policy.pdf" },
+    { title: "Climate Action Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Climate-Action-Policy.pdf" },
+    { title: "Policy to safeguard individuals reporting discrimination", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Policy-to-safeguard-individuals-reporting-discrimination.pdf" },
+    { title: "Anti-discrimination and Equal Employment Opportunity Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Anti-discrimination-and-Equal-Employment-Opportunity-Policy-1.pdf" },
+    { title: "Policy promoting women's applications and enrolment", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Policy-promoting-womens-applications-and-enrolment.pdf" },
+    { title: "Smoke free Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Smoke-free-Policy.pdf" },
+    { title: "Scholarship Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Scholarship_Policy.pdf" },
+    { title: "Pay scale equality policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Pay-scale-equality-policy.pdf" },
+    { title: "Annual Increment criteria for Academic Staff", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Annual-Increment-criteria-for-Academic-Staff.pdf" },
+    { title: "Leave Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Leave-Policy.pdf" },
+    { title: "Water Reuse Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Water-Reuse-Policy.pdf" },
+    { title: "Food Waste Management Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Food-Waste-Management-Policy.pdf" },
+    { title: "Energy Efficiency standards for buildings Policy", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/Energy-Efficiency-standards-for-buildings-Policy.pdf" },
+    { title: "AICTE Approval Letters (EOA Report)", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/EOA-Report-25-26.pdf" },
+    { title: "Audit Reports (Provisional BS)", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/PROVISIONAL-BS.pdf" },
+    { title: "NIRF Ranking", url: "https://site-generator-documents.s3.eu-north-1.amazonaws.com/institutional+documents/NIRF-Engineering-Trident-Academy-of-Technology-TAT20260314.pdf" }
   ];
 
   return (
@@ -51,7 +75,7 @@ const Compliance = () => {
               </p>
               
               <MagneticButton strength={0.2}>
-                <a href="#" className="inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest hover:text-brand-accent transition-colors group/btn">
+                <a href={doc.url || "#"} target={doc.url && doc.url !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest hover:text-brand-accent transition-colors group/btn">
                   View Document 
                   <span className="w-6 h-px bg-white/50 group-hover/btn:w-10 group-hover/btn:bg-brand-accent transition-all duration-300" />
                 </a>
@@ -59,6 +83,45 @@ const Compliance = () => {
             </div>
           ))}
         </StaggerChildren>
+
+        {/* Policies Dropdown View */}
+        <div className="max-w-4xl mx-auto mt-32 relative z-20">
+          <button 
+            onClick={() => setShowPolicies(!showPolicies)}
+            className="w-full group flex items-center justify-between p-6 bg-[#1D222D]/80 hover:bg-[#222834] border border-white/10 hover:border-brand-accent/50 transition-all duration-300"
+          >
+            <h3 className="text-2xl md:text-3xl font-serif font-black text-white">
+              Institutional <span className="italic text-brand-accent font-light">Policies</span>
+            </h3>
+            <div className={`text-brand-accent transition-transform duration-500 flex items-center justify-center ${showPolicies ? 'rotate-180' : ''}`}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </button>
+          
+          <div className={`overflow-hidden transition-all duration-700 ease-in-out ${showPolicies ? 'max-h-[3000px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+            <StaggerChildren className="flex flex-col space-y-3" stagger={0.05}>
+              {policies.map((policy, index) => (
+                <div 
+                  key={index}
+                  className="group flex items-center justify-between p-5 md:p-6 bg-[#1D222D]/80 hover:bg-brand-accent/5 border border-white/5 hover:border-brand-accent/30 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 md:gap-6">
+                    <span className="text-brand-accent font-mono text-sm opacity-40 group-hover:opacity-100 transition-opacity">{(index + 1).toString().padStart(2, '0')}</span>
+                    <span className="text-base md:text-lg text-white/70 group-hover:text-white font-medium transition-colors">{policy.title}</span>
+                  </div>
+                  <MagneticButton strength={0.1}>
+                    <a href={policy.url} target="_blank" rel="noopener noreferrer" className="opacity-0 group-hover:opacity-100 text-brand-accent text-xs font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-2">
+                      Read 
+                      <span className="w-4 h-px bg-brand-accent block group-hover:w-8 transition-all duration-300" />
+                    </a>
+                  </MagneticButton>
+                </div>
+              ))}
+            </StaggerChildren>
+          </div>
+        </div>
 
       </div>
     </section>

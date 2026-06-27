@@ -2,6 +2,19 @@ import React, { useRef, useEffect } from 'react';
 import { gsap, ScrollTrigger } from '../lib/gsap-setup';
 import { TextReveal, MaskReveal } from '../utils/animations';
 
+const RECOGNITION_LOGOS = [
+  { src: '/logos/aicte.png', alt: 'AICTE' },
+  { src: '/logos/naac.png', alt: 'NAAC' },
+  { src: '/logos/nba.png', alt: 'NBA' },
+  { src: '/logos/istd.png', alt: 'ISTD' },
+  { src: '/logos/Indian_Institute_of_Technology_Bhubaneswar_Logo.svg.png', alt: 'IIT Bhubaneswar' },
+  { src: '/logos/NBCC_ANNUAL_REPORT_2014_15.svg.png', alt: 'NBCC' },
+  { src: '/logos/SAP_2011_logo.svg.png', alt: 'SAP' },
+  { src: '/logos/imd.jpg', alt: 'IMD' },
+  { src: '/logos/nic-logo-nic-logo-1-bilingual-sans-01.jpg', alt: 'NIC' },
+  { src: '/logos/nipm.png', alt: 'NIPM' },
+];
+
 const Recognitions = () => {
   const sectionRef = useRef(null);
 
@@ -117,6 +130,7 @@ const Recognitions = () => {
           </div>
 
         </div>
+
       </div>
     </section>
   );

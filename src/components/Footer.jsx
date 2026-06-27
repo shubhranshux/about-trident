@@ -1,9 +1,7 @@
-import React from 'react';
+import logo from "../assets/logo.png";
 import { FadeInUp } from "../utils/animations";
-import { Mail, Phone, MapPin, Facebook, Linkedin, Instagram, ArrowRight, Youtube } from "lucide-react";
 
-// Assuming logo is in public folder or available
-const logo = "/logo.png"; 
+import { Mail, Phone, MapPin, Facebook, Linkedin, Instagram, ArrowRight, Youtube } from "lucide-react";
 
 const XIcon = ({ size = 20, className = "" }) => (
   <svg 
@@ -32,12 +30,14 @@ export default function Footer() {
 
       <div className="max-w-[1400px] mx-auto px-6 xl:px-12 relative z-10">
         
+
+
         <FadeInUp>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
             
             {/* Brand Column */}
             <div className="lg:col-span-4">
-              <a href="/" className="flex items-center gap-5 mb-10 text-decoration-none">
+              <a href="https://tat.tekkzy.com" className="flex items-center gap-5 mb-10 text-decoration-none">
                 <img src={logo} alt="TAT Logo" className="w-[64px] h-[64px] object-contain" />
                 <div className="h-12 w-[1px] bg-white/10 mx-2"></div>
                 <div className="flex flex-col justify-center">
@@ -66,28 +66,29 @@ export default function Footer() {
               </div>
             </div>
 
+
             {/* Links Columns */}
             <div className="lg:col-span-8 grid grid-cols-2 lg:grid-cols-3 gap-12">
               {[
                 { h:"Academics & Student Life", ls:[
-                  { t:"Library", h:"#" },
-                  { t:"IQAC", h:"#" },
-                  { t:"Testimonials", h:"#" },
-                  { t:"Student Clubs", h:"#" },
-                  { t:"CISCO thingQbator", h:"#" },
+                  { t:"Library", h:"/library" },
+                  { t:"IQAC", h:"/iqac" },
+                  { t:"Testimonials", h:"/testimonials" },
+                  { t:"Student Clubs", h:"/student-clubs" },
+                  { t:"CISCO thingQbator", h:"/cisco-thingqbator" },
                   { t:"E-Governance Portal", h:"https://ais.tat.ac.in/ais/" },
-                  { t:"Grievance", h:"#" },
-                  { t:"ICC", h:"#" },
+                  { t:"Grievance", h:"/grievance" },
+                  { t:"ICC", h:"/icc" },
                 ] },
                 { h:"About the Institution", ls:[
-                  { t:"About Us", h:"#" },
-                  { t:"NAAC", h:"#" },
-                  { t:"NBA", h:"#" },
-                  { t:"NIRF", h:"#" },
-                  { t:"SIRO (DSIR)", h:"#" },
-                  { t:"AICTE Mandatory Disclosure", h:"#" },
-                  { t:"Career", h:"#" },
-                  { t:"Information Brochure", h:"#" },
+                  { t:"About Us", h:"/about" },
+                  { t:"NAAC", h:"/naac" },
+                  { t:"NBA", h:"/nba" },
+                  { t:"NIRF", h:"/nirf" },
+                  { t:"SIRO (DSIR)", h:"/siro" },
+                  { t:"AICTE Mandatory Disclosure", h:"/aicte-disclosure" },
+                  { t:"Career", h:"/career" },
+                  { t:"Information Brochure", h:"/information-brochure" },
                 ] },
                 { h:"Trident Group Websites", ls:[
                   { t:"Trident Academy of Creative Technology (TACT)", h:"https://tact.ac.in/" },
@@ -124,8 +125,12 @@ export default function Footer() {
               © 2026 Trident Academy of Technology. All rights reserved.
             </span>
             <div className="flex gap-4 text-[11px] font-medium text-gray-600">
-               {["Privacy Policy", "Disclaimer", "Terms of Use"].map(l=>(
-                 <a key={l} href="https://tat.tekkzy.com/" className="hover:text-[#E5AA3E] transition-colors uppercase tracking-wider">{l}</a>
+               {[
+                 { label: "Privacy Policy", href: "/privacy-policy" },
+                 { label: "Disclaimer", href: "/disclaimer" },
+                 { label: "Terms of Use", href: "/terms-of-use" }
+               ].map(l=>(
+                 <a key={l.label} href={l.href} className="hover:text-[#E5AA3E] transition-colors uppercase tracking-wider">{l.label}</a>
                ))}
             </div>
           </div>

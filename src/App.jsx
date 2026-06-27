@@ -1,82 +1,78 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import SubNav from './components/SubNav';
-import StatsCounter from './components/StatsCounter';
-import Identity from './components/Identity';
-import VisionMission from './components/VisionMission';
-import History from './components/History';
-import Recognitions from './components/Recognitions';
-import Leadership from './components/Leadership';
-import Success from './components/Success';
-import Compliance from './components/Compliance';
 import Footer from './components/Footer';
-import SectionDivider from './components/SectionDivider';
 
-/*
- * "QUIET LUXURY" EDITORIAL COLOR MAP:
- * A cohesive, sophisticated palette alternating between dark and light,
- * providing high contrast and a true premium magazine feel.
- * 
- * Hero         → #0A0A0A (Onyx)
- * Stats        → #14191F (Navy Charcoal)
- * Identity     → #F5F2EB (Parchment - Light)
- * Vision       → #E3DEC6 (Warm Stone - Light)
- * History      → #F5F2EB (Parchment - Light)
- * Recognitions → #1A1C18 (Deep Forest Charcoal)
- * Leadership   → #F5F2EB (Parchment - Light)
- * Success      → #E3DEC6 (Warm Stone - Light)
- * Compliance   → #0A0A0A (Onyx)
- */
+// Pages
+import HomePage from './pages/HomePage';
 
-const COLORS = {
-  hero: '#0A0A0A',
-  stats: '#14191F',
-  identity: '#F5F2EB',
-  vision: '#E3DEC6',
-  history: '#F5F2EB',
-  recognitions: '#1A1C18',
-  leadership: '#F5F2EB',
-  success: '#E3DEC6',
-  compliance: '#181C25',
-};
+const LibraryPage         = lazy(() => import("./pages/LibraryPage"));
+const IQACPage            = lazy(() => import("./pages/IQACPage"));
+const DVVPage             = lazy(() => import("./pages/DVVPage"));
+const TridentPoliciesPage = lazy(() => import("./pages/TridentPoliciesPage"));
+const TestimonialsPage    = lazy(() => import("./pages/TestimonialsPage"));
+const StudentClubsPage    = lazy(() => import("./pages/StudentClubsPage"));
+const CiscoThingQbatorPage= lazy(() => import("./pages/CiscoThingQbatorPage"));
+const GrievancePage       = lazy(() => import("./pages/GrievancePage"));
+const ICCPage             = lazy(() => import("./pages/ICCPage"));
+const AlumniPage          = lazy(() => import("./pages/AlumniPage"));
+
+const AboutPage              = lazy(() => import("./pages/AboutPage"));
+const NAACPage               = lazy(() => import("./pages/NAACPage"));
+const NBAPage                = lazy(() => import("./pages/NBAPage"));
+const NIRFPage               = lazy(() => import("./pages/NIRFPage"));
+const SIROPage               = lazy(() => import("./pages/SIROPage"));
+const AICTEDisclosurePage    = lazy(() => import("./pages/AICTEDisclosurePage"));
+const CareerPage             = lazy(() => import("./pages/CareerPage"));
+const InformationBrochurePage= lazy(() => import("./pages/InformationBrochurePage"));
+const BPUTAffiliationPage    = lazy(() => import("./pages/BPUTAffiliationPage"));
+const FinancialAuditsPage    = lazy(() => import("./pages/FinancialAuditsPage"));
+const AntiRaggingPage        = lazy(() => import("./pages/AntiRaggingPage"));
+
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
+const DisclaimerPage    = lazy(() => import("./pages/DisclaimerPage"));
+const TermsOfUsePage    = lazy(() => import("./pages/TermsOfUsePage"));
 
 function App() {
   return (
-    <>
+    <Router>
       <div className="min-h-screen bg-black">
         <Header />
-        <SubNav />
-        <main>
-          <div id="hero"><Hero /></div>
-          <SectionDivider variant="slant" topColor={COLORS.hero} bottomColor={COLORS.stats} height={100} />
+        <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            
+            <Route path="/library" element={<LibraryPage />} />
+            <Route path="/iqac" element={<IQACPage />} />
+            <Route path="/dvv" element={<DVVPage />} />
+            <Route path="/trident-policies" element={<TridentPoliciesPage />} />
+            <Route path="/testimonials" element={<TestimonialsPage />} />
+            <Route path="/alumni" element={<AlumniPage />} />
+            <Route path="/student-clubs" element={<StudentClubsPage />} />
+            <Route path="/cisco-thingqbator" element={<CiscoThingQbatorPage />} />
+            <Route path="/grievance" element={<GrievancePage />} />
+            <Route path="/icc" element={<ICCPage />} />
 
-          <div id="stats-counter"><StatsCounter /></div>
-          <SectionDivider variant="wave" topColor={COLORS.stats} bottomColor={COLORS.identity} height={120} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/naac" element={<NAACPage />} />
+            <Route path="/nba" element={<NBAPage />} />
+            <Route path="/nirf" element={<NIRFPage />} />
+            <Route path="/siro" element={<SIROPage />} />
+            <Route path="/aicte-disclosure" element={<AICTEDisclosurePage />} />
+            <Route path="/bput-affiliation" element={<BPUTAffiliationPage />} />
+            <Route path="/financial-audits" element={<FinancialAuditsPage />} />
+            <Route path="/anti-ragging" element={<AntiRaggingPage />} />
+            <Route path="/career" element={<CareerPage />} />
+            <Route path="/information-brochure" element={<InformationBrochurePage />} />
 
-          <div id="identity"><Identity /></div>
-          <SectionDivider variant="slant" topColor={COLORS.identity} bottomColor={COLORS.vision} height={100} flip />
-
-          <div id="vision-mission"><VisionMission /></div>
-          <SectionDivider variant="wave" topColor={COLORS.vision} bottomColor={COLORS.history} height={120} />
-
-          <div id="milestones"><History /></div>
-          <SectionDivider variant="slant" topColor={COLORS.history} bottomColor={COLORS.recognitions} height={100} />
-
-          <div id="academics"><Recognitions /></div>
-          <SectionDivider variant="wave" topColor={COLORS.recognitions} bottomColor={COLORS.leadership} height={120} flip />
-
-          <div id="leadership"><Leadership /></div>
-          <SectionDivider variant="slant" topColor={COLORS.leadership} bottomColor={COLORS.success} height={100} />
-
-          <div id="success"><Success /></div>
-          <SectionDivider variant="wave" topColor={COLORS.success} bottomColor={COLORS.compliance} height={120} />
-
-          <div id="compliance"><Compliance /></div>
-        </main>
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/disclaimer" element={<DisclaimerPage />} />
+            <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+          </Routes>
+        </Suspense>
         <Footer />
       </div>
-    </>
+    </Router>
   );
 }
 

@@ -1,28 +1,40 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap, ScrollTrigger } from '../lib/gsap-setup';
 import { TextReveal, MaskReveal } from '../utils/animations';
+
+const SLIDER_IMAGES = [
+  { src: '/slider/slider 1.png', alt: 'Trident Campus View 1' },
+  { src: '/slider/slider 2.png', alt: 'Trident Campus View 2' },
+  { src: '/slider/slider 32.png', alt: 'Trident Campus View 3' },
+];
+
+const SLIDE_INTERVAL = 5000; // 5 seconds
 
 const Hero = () => {
   const sectionRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const intervalRef = useRef(null);
 
-  const slides = [
-    "/slider/slider 1.png",
-    "/slider/slider 2.png",
-    "/slider/slider 3.png",
-    "/slider/slider 4.png",
-    "/slider/slider 5.png",
-    "/slider/slider 6.png"
-  ];
+  // Auto-advance slides
+  const startAutoPlay = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
+    }, SLIDE_INTERVAL);
+  }, []);
 
   useEffect(() => {
-    // Slideshow interval
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    startAutoPlay();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [startAutoPlay]);
 
-    return () => clearInterval(interval);
-  }, [slides.length]);
+  // Go to specific slide
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+    startAutoPlay(); // Reset timer on manual navigation
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,21 +63,23 @@ const Hero = () => {
   return (
     <section ref={sectionRef} className="relative min-h-[100vh] flex items-center pt-48 pb-32 overflow-hidden bg-black">
       
-      {/* BACKGROUND SLIDESHOW */}
+      {/* BACKGROUND IMAGE SLIDER */}
       <div className="absolute inset-0 z-0 bg-black">
-        {slides.map((slide, index) => (
+        {SLIDER_IMAGES.map((slide, index) => (
           <img
             key={index}
-            src={slide}
-            alt={`Trident Campus ${index + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out ${
-              index === currentSlide ? 'opacity-60' : 'opacity-0'
-            }`}
+            src={slide.src}
+            alt={slide.alt}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: currentSlide === index ? 1 : 0,
+              transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: 'opacity',
+            }}
           />
         ))}
         
-        {/* Static geometric overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
+
 
         <div className="absolute -left-20 -bottom-20 w-[600px] h-[600px] opacity-[0.04] z-20 pointer-events-none select-none">
           <img
@@ -81,7 +95,7 @@ const Hero = () => {
           <div className="flex flex-col">
 
             <div className="hero-label editorial-label text-white/70 mb-10">
-              <span>ISSUE 01 / ABOUT TRIDENT ACADEMY</span>
+              <span>ABOUT TRIDENT ACADEMY</span>
             </div>
 
             <TextReveal className="mb-6" delay={400} stagger={0.02}>
@@ -121,6 +135,28 @@ const Hero = () => {
         <span className="text-[11px] font-black text-slate-400 tracking-[5px] uppercase mb-1">Established</span>
         <span className="text-6xl font-serif font-black text-brand-primary">2005</span>
         <div className="w-16 h-[4px] bg-brand-accent mt-4" />
+      </div>
+
+      {/* Slide Indicator Dots */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3 items-center">
+        {SLIDER_IMAGES.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+            className="group relative p-1"
+          >
+            <span
+              className="block rounded-full transition-all duration-500 ease-out"
+              style={{
+                width: currentSlide === index ? '32px' : '10px',
+                height: '10px',
+                backgroundColor: currentSlide === index ? 'rgba(212, 175, 55, 1)' : 'rgba(255, 255, 255, 0.4)',
+                borderRadius: currentSlide === index ? '5px' : '50%',
+              }}
+            />
+          </button>
+        ))}
       </div>
 
       <div className="absolute left-0 top-0 w-1.5 h-full bg-brand-accent/40 z-20" />

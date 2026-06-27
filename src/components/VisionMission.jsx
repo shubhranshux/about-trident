@@ -59,9 +59,12 @@ const VisionMission = () => {
         
         {/* VISION SECTION - Massive Statement */}
         <div className="max-w-6xl mb-32 md:mb-48 relative">
-          <div className="flex items-center gap-6 mb-12">
-            <span className="editorial-label text-slate-500 block">OUR VISION</span>
-            <div className="flex-1 h-px bg-slate-900/10"></div>
+          <div className="flex justify-between items-end mb-16">
+            <TextReveal delay={200}>
+              <h2 className="text-4xl md:text-5xl font-black font-serif text-slate-900">
+                Our <span className="italic text-slate-600 font-light">Vision</span>
+              </h2>
+            </TextReveal>
           </div>
           
           <div className="pl-0 md:pl-16 lg:pl-32 border-l-4 border-slate-900">
