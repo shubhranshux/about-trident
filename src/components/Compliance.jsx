@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TextReveal, StaggerChildren, MagneticButton } from '../utils/animations';
 
 const Compliance = () => {
   const [showPolicies, setShowPolicies] = useState(false);
 
   const documents = [
-    { title: "AICTE Approval Letters", desc: "Mandatory disclosures and yearly approval extensions", year: "2023-24" },
-    { title: "BPUT Affiliation", desc: "Permanent affiliation certificates from Biju Patnaik University of Technology", year: "2023" },
-    { title: "NBA Accreditation", desc: "National Board of Accreditation status for eligible programs", year: "Active" },
-    { title: "NAAC Assessment", desc: "Grade and institutional assessment metrics", year: "A Grade" },
-    { title: "Audit Reports", desc: "Annual financial statements and academic audits", year: "2022-23" },
-    { title: "Anti-Ragging Policy", desc: "UGC guidelines and committee details", year: "Updated" }
+    { title: "AICTE Approval Letters", desc: "Mandatory disclosures and yearly approval extensions", year: "2023-24", url: "/aicte-disclosure" },
+    { title: "BPUT Affiliation", desc: "Permanent affiliation certificates from Biju Patnaik University of Technology", year: "2023", url: "/bput-affiliation" },
+    { title: "NBA Accreditation", desc: "National Board of Accreditation status for eligible programs", year: "Active", url: "/nba" },
+    { title: "NAAC Assessment", desc: "Grade and institutional assessment metrics", year: "A Grade", url: "/naac" },
+    { title: "Audit Reports", desc: "Annual financial statements and academic audits", year: "2022-23", url: "/financial-audits" },
+    { title: "Anti-Ragging Policy", desc: "UGC guidelines and committee details", year: "Updated", url: "/anti-ragging" }
   ];
 
   const policies = [
@@ -65,7 +66,6 @@ const Compliance = () => {
             >
               <div className="flex justify-between items-start mb-4">
                 <span className="text-[10px] font-bold tracking-[0.2em] text-white/30 uppercase">{`DOC 0${index + 1}`}</span>
-                <span className="text-xs font-bold text-brand-accent bg-brand-accent/10 px-3 py-1">{doc.year}</span>
               </div>
               <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-accent transition-colors">
                 {doc.title}
@@ -75,10 +75,17 @@ const Compliance = () => {
               </p>
               
               <MagneticButton strength={0.2}>
-                <a href={doc.url || "#"} target={doc.url && doc.url !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest hover:text-brand-accent transition-colors group/btn">
-                  View Document 
-                  <span className="w-6 h-px bg-white/50 group-hover/btn:w-10 group-hover/btn:bg-brand-accent transition-all duration-300" />
-                </a>
+                {doc.url?.startsWith('/') ? (
+                  <Link to={doc.url} className="inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest hover:text-brand-accent transition-colors group/btn">
+                    View Document 
+                    <span className="w-6 h-px bg-white/50 group-hover/btn:w-10 group-hover/btn:bg-brand-accent transition-all duration-300" />
+                  </Link>
+                ) : (
+                  <a href={doc.url || "#"} target={doc.url && doc.url !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest hover:text-brand-accent transition-colors group/btn">
+                    View Document 
+                    <span className="w-6 h-px bg-white/50 group-hover/btn:w-10 group-hover/btn:bg-brand-accent transition-all duration-300" />
+                  </a>
+                )}
               </MagneticButton>
             </div>
           ))}

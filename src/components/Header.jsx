@@ -1,11 +1,16 @@
 import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Users, Menu, X, FileText, ChevronDown, Award, CheckCircle, ShieldCheck, FileSpreadsheet, ShieldAlert, BookOpen } from "lucide-react";
 import { NAV_LINKS } from "../data/constants";
 import logo from "../assets/logo.png";
 
 export default function Header() {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  
+  const isTransparent = isHomePage && !scrolled;
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
@@ -87,7 +92,7 @@ export default function Header() {
       </div>
 
       <header 
-        className={"relative transition-all duration-500 bg-white " + (scrolled ? "shadow-[0_4px_20px_-4px_rgba(15,23,42,0.12)] py-3" : "py-5")}
+        className={`relative transition-all duration-500 ${isTransparent ? 'bg-transparent py-5' : 'bg-white shadow-[0_4px_20px_-4px_rgba(15,23,42,0.12)] py-3'}`}
       >
         <div className="mx-auto px-6 xl:px-12 flex items-center justify-between">
             
@@ -95,9 +100,9 @@ export default function Header() {
           <a href="https://tat.tekkzy.com" className="flex items-center gap-3.5 group cursor-pointer text-decoration-none">
             <img src={logo} alt="TAT Logo" className="w-12 h-12 md:w-[52px] md:h-[52px] object-contain flex-shrink-0 drop-shadow-sm" />
             <div className="hidden sm:flex flex-col justify-center items-start">
-              <div className="font-serif text-[24px] md:text-[28px] font-black leading-none uppercase transition-colors duration-500 text-[#3E3A36]" style={{ fontFamily: "'Playfair Display', 'Source Serif 4', serif", letterSpacing: "0.02em" }}>TRIDENT</div>
-              <div className="w-full h-[1px] my-[4px] transition-all duration-500 bg-[#3E3A36]/30"></div>
-              <div className="font-sans text-[9px] md:text-[10.5px] font-bold tracking-[0.25em] uppercase leading-none transition-colors duration-500 text-[#3E3A36]/80">ACADEMY OF TECHNOLOGY</div>
+              <div className={`font-serif text-[24px] md:text-[28px] font-black leading-none uppercase transition-colors duration-500 ${isTransparent ? 'text-white' : 'text-[#3E3A36]'}`} style={{ fontFamily: "'Playfair Display', 'Source Serif 4', serif", letterSpacing: "0.02em" }}>TRIDENT</div>
+              <div className={`w-full h-[1px] my-[4px] transition-all duration-500 ${isTransparent ? 'bg-white/30' : 'bg-[#3E3A36]/30'}`}></div>
+              <div className={`font-sans text-[9px] md:text-[10.5px] font-bold tracking-[0.25em] uppercase leading-none transition-colors duration-500 ${isTransparent ? 'text-white/80' : 'text-[#3E3A36]/80'}`}>ACADEMY OF TECHNOLOGY</div>
             </div>
           </a>
 
@@ -106,7 +111,7 @@ export default function Header() {
             <ul className="flex items-center gap-8 list-none m-0 p-0">
               {NAV_LINKS.map(item => (
                 <li key={item.label}>
-                  <a href={item.href} className="nav-link text-[14px] uppercase tracking-[0.08em] cursor-pointer whitespace-nowrap font-semibold transition-colors duration-500 text-decoration-none text-[#3E3A36] hover:text-[#1B4D8E]">
+                  <a href={item.href} className={`nav-link text-[14px] uppercase tracking-[0.08em] cursor-pointer whitespace-nowrap font-semibold transition-colors duration-500 text-decoration-none hover:text-[#1B4D8E] ${isTransparent ? 'text-white' : 'text-[#3E3A36]'} ${item.label === 'About' ? 'border-b-[3px] border-[#1B4D8E] pb-1' : ''}`}>
                     {item.label}
                   </a>
                 </li>
@@ -121,7 +126,7 @@ export default function Header() {
 
           {/* Mobile Toggle */}
           <button 
-            className="lg:hidden p-2 rounded-lg transition-colors active:scale-95 z-50 relative text-primary bg-soft hover:bg-primary/10"
+            className={`lg:hidden p-2 rounded-lg transition-colors active:scale-95 z-50 relative ${isTransparent ? 'text-white bg-white/10 hover:bg-white/20' : 'text-primary bg-soft hover:bg-primary/10'}`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle Menu"
           >
